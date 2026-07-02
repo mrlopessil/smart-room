@@ -1,8 +1,8 @@
-import face_recognition
+import python.src.face_recognition as face_recognition
 import os
 import numpy as np
 import cv2
-from config import FACES_PATH
+from python.config import FACES_PATH
 
 
 class FaceRecognizer:

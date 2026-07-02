@@ -1,5 +1,5 @@
 from Adafruit_IO import MQTTClient
-from config import AIO_USERNAME, AIO_KEY, FEED_LIGHT, FEED_AC, FEED_INTRUDER, FEED_LAST_PERSON, FEED_ALARM
+from python.config import AIO_USERNAME, AIO_KEY, FEED_LIGHT, FEED_AC, FEED_INTRUDER, FEED_LAST_PERSON, FEED_ALARM
 
 client = MQTTClient(AIO_USERNAME, AIO_KEY)
 client.connect()

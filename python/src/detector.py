@@ -1,5 +1,5 @@
 from rfdetr import RFDETRNano
-from config import PERSON_CLASS_ID
+from python.config import PERSON_CLASS_ID
 
 class DetectPerson:
 	def __init__(self):

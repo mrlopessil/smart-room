@@ -28,3 +28,4 @@ FEED_ALARM = "alarm"
 
 SNAPSHOTS_DIR = "snapshots"
 MAX_SNAPSHOTS_FILES = 100
+

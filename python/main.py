@@ -1,11 +1,11 @@
-import cv2, time, os
-from src.detector import DetectPerson
-from src.adafruit_client import last_seen, invader, light_on, ac_on, light_off, ac_off, alarm_on, alarm_off
-from src.face_recognition import FaceRecognizer
-from config import CAMERA, NO_PERSON_DETECTED_TIMEOUT
+import cv2, time
+from python.src.detector import DetectPerson
+from python.src.adafruit_client import last_seen, invader, light_on, ac_on, light_off, ac_off, alarm_on, alarm_off
+from python.src.face_recognition import FaceRecognizer
+from python.config import CAMERA, NO_PERSON_DETECTED_TIMEOUT
 import supervision as sv
 from base64 import b64encode
-from src.cleanup import cleanup_snapshots
+from python.src.cleanup import cleanup_snapshots
 from PIL import Image
 import io
 
