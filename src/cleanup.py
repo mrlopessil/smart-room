@@ -1,6 +1,6 @@
 import os
 import time
-from python.config import SNAPSHOTS_DIR, MAX_SNAPSHOTS_FILES
+from config import SNAPSHOTS_DIR, MAX_SNAPSHOTS_FILES
 
 def cleanup_snapshots():
     files = [

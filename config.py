@@ -1,7 +1,6 @@
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-
 FACES_PATH = BASE_DIR / "data" / "faces"
 
 # CAMERA
@@ -28,4 +27,3 @@ FEED_ALARM = "alarm"
 
 SNAPSHOTS_DIR = "snapshots"
 MAX_SNAPSHOTS_FILES = 100
-
