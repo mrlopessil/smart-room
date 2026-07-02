@@ -3,3 +3,9 @@ __pycache__/
 *.pyo
 data/faces/Maria
 venv/
+snapshots/*
+python/my_config.py
+esp32-smart-room/.vscode/c_cpp_properties.json
+esp32-smart-room/.vscode/launch.json
+.pio
+esp32-smart-room/include/my_config.h
