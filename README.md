@@ -139,6 +139,15 @@ Opcionalmente, você também pode criar os feeds:
 
 Altere os nomes dos feeds em `config.py` e em `mqtt.h` caso queira.
 
+### Problema com o buzzer no Wokwi:
+
+O buzzer pode, ocasionalmente, não emitir som durante a primeira execução no simulador.
+
+Caso isso ocorra:
+
+- Reinicie a simulação no Wokwi (Stop e Start Simulator)
+- Ou reinicie o simulador completamente
+
 ## Melhorias
 O sistema pode ser adaptado para um ambiente físico real, substituindo os componentes de simulação por dispositivos reais:
 - LEDs (iluminação e ar-condicionado) -> controles de iluminação e climatização controlados via relé ou dispositivos inteligentes.
