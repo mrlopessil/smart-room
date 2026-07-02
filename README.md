@@ -112,7 +112,7 @@ python main.py
 ### ESP32 não conecta ao MQTT:
 - Certifique-se que AIO_USERNAME e AIO_KEY foram configuradas corretamente em `config.py` e `config.h`.
 
-### Aplicação Python fecha automaticamente
+### Aplicação Python fecha automaticamente:
 Se a aplicação for encerrada antes de exibir a imagem da câmera, verifique se o índice da câmera configurado no arquivo `config.py` está correto.
 
 Caso o computador não possua uma câmera ou você prefira utilizar o celular, é possível usá-lo como uma câmera IP. Para isso, instale um aplicativo de câmera IP no dispositivo móvel e configure a URL de transmissão no arquivo `config.py`.
@@ -122,6 +122,22 @@ Passos para usar o celular como câmera:
 2. Inicie a transmissão de vídeo.
 3. Copie a URL informada pelo aplicativo.
 4. Configure essa URL no arquivo `config.py` (provavelmente tendo que adicionar /video no final).
+
+### Nada muda na simulação do ESP32:
+Se os LEDs e o buzzer não mudam de estado, verifique se os feeds foram criados corretamente no Adafruit IO e se seus nomes correspondem aos configurados no projeto.
+
+Crie, no mínimo, os seguintes feeds:
+
+- alarm
+- ac
+- light
+
+Opcionalmente, você também pode criar os feeds:
+
+- last_seen (armazenar a imagem da última pessoa detectada)
+- intruder (armazenar a imagem de pessoas não reconhecidas)
+
+Altere os nomes dos feeds em `config.py` e em `mqtt.h` caso queira.
 
 ## Melhorias
 O sistema pode ser adaptado para um ambiente físico real, substituindo os componentes de simulação por dispositivos reais:
