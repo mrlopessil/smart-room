@@ -92,7 +92,7 @@ No VS Code e com a extensão do PlatformIO instalada aperte F1 e selecione Platf
 Aperte F1 e selecione PlatformIO: Build.
 
 ### Passo 8: simular sistema embarcado com Wokwi
-Quando a compilação terminar aperte F1 novamente e selecione Wokwi: Start Simulator.
+Quando a compilação terminar e com a extensão Wokwi Simulator instalada, aperte F1 novamente e selecione Wokwi: Start Simulator.
 
 O simulador será iniciado. Quando o terminal exibir as mensagens:
 ```text
@@ -110,7 +110,7 @@ python main.py
 
 ## Troubleshoot
 ### ESP32 não conecta ao MQTT:
-- Certifique-se que AIO_USERNAME e AIO_KEY foram configuradas corretamente em `config.py` e `config.h`.
+Certifique-se que AIO_USERNAME e AIO_KEY foram configuradas corretamente em `config.py` e `config.h`.
 
 ### Aplicação Python fecha automaticamente:
 Se a aplicação for encerrada antes de exibir a imagem da câmera, verifique se o índice da câmera configurado no arquivo `config.py` está correto.
