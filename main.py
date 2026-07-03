@@ -9,6 +9,14 @@ from src.cleanup import cleanup_snapshots
 from PIL import Image
 import io
 
+def encode_image(path):
+    img = Image.open(path)
+    img.thumbnail((320,240))
+    buffer = io.BytesIO()
+    img.save(buffer, format="JPEG", quality=40, optimize=True)
+
+    return b64encode(buffer.getvalue()).decode("utf-8")
+
 last_presence_publish = 0
 last_alarm_publish = 0
 last_seen_publish = 0
@@ -22,18 +30,24 @@ box_annotator = sv.BoxAnnotator()
 
 last_faces = set()
 
+frame_count = 0
 while True:
     ret, frame = video_capture.read()
 
     if not ret:
         break
 
-    people = detector.detect(frame)
+    frame_count += 1
 
-    annotated_frame = box_annotator.annotate(
-        scene=frame,
-        detections=people
-    )
+    people = None
+    if frame_count % 3 == 0:
+        people = detector.detect(frame)
+
+    if people is None:
+        cv2.imshow("Camera", frame)
+        if cv2.waitKey(30) == 27:
+            break
+        continue
 
     count = len(people)
 
@@ -53,7 +67,9 @@ while True:
             name = face.recognize(person_crop)
             recognized_names.append(name)
 
-        print(recognized_names)
+        if frame_count % 10 == 0:
+            print(recognized_names)
+            
         known_faces = [n for n in recognized_names if n != "unknown"]
         current_faces = set(known_faces)
         
@@ -65,20 +81,15 @@ while True:
             cv2.imwrite(filename, frame)
             cleanup_snapshots()
 
-            img = Image.open(filename)
-            img.thumbnail((320,240))
-            buffer = io.BytesIO()
-            img.save(buffer, format="JPEG", quality=40, optimize=True)
-
-            stream = b64encode(buffer.getvalue()).decode("utf-8")
-
-            last_seen(stream)
+            last_seen_stream = encode_image(filename)
+            last_seen(last_seen_stream)
 
             last_seen_publish = time.time()
+
             last_faces = current_faces.copy()
 
         if time.time() - last_alarm_publish > NO_PERSON_DETECTED_TIMEOUT:
-            intruder = len(known_faces) == 0
+            intruder = len(known_faces) == 0 and len(recognized_names) > 0
 
             if intruder:
                 print("Intruso detectado - ativando alarme")
@@ -87,9 +98,10 @@ while True:
                 cv2.imwrite(filename, frame)
                 cleanup_snapshots()
 
-                invader(stream)
+                last_invader_stream = encode_image(filename)
+                invader(last_invader_stream)
             else:
-                print(f"Rosto reconhecido: {name}")
+                print(f"Rosto reconhecido: {recognized_names}")
                 alarm_off()
 
             last_alarm_publish = time.time()
@@ -102,9 +114,9 @@ while True:
             last_presence_publish = time.time()
 
 
-    cv2.imshow("Camera", annotated_frame)
+    cv2.imshow("Camera", frame)
 
-    if cv2.waitKey(1) == 27:
+    if cv2.waitKey(30) == 27:
         break
 
 video_capture.release()
